@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Municipio;
-use APP\Departamento;
+use App\Departamento;
 
 class MunicipioController extends Controller
 {
@@ -15,11 +16,11 @@ class MunicipioController extends Controller
      */
     public function index()
     {
-        $departamentos = DB::table('tb_departamento as d')
-                    ->join('tb_pais','d.pais_codi','=','tb_pais.pais_codi')
-                    ->select('d.depa_codi','d.depa_nomb','d.pais_codi','tb_pais.pais_nomb')
+        $municipios = DB::table('tb_municipio as m')
+                    ->join('tb_departamento as d','m.depa_codi','=','d.depa_codi')
+                    ->select('m.muni_codi','m.muni_nomb','m.depa_codi','d.depa_nomb')
                     ->get();
-        return view('departamento.index', compact('departamentos'));
+        return view('municipio.index', compact('municipios'));
     }
 
     /**
@@ -30,7 +31,7 @@ class MunicipioController extends Controller
     public function create()
     {
         $departamentos = Departamento::orderBy('depa_nomb')->get();
-        return view('departamento.create',compact('departamentos'));
+        return view('municipio.create',compact('departamentos'));
     }
 
     /**
@@ -41,11 +42,11 @@ class MunicipioController extends Controller
      */
     public function store(Request $request)
     {
-        $departamento = new Departamento;
-        $comuna->comu_nomb = $request->comu_nomb;
-        $comuna->muni_codi = $request->muni_codi;
-        $comuna->save();
-        return redirect()->route('comuna.index')->with('status','guardado');
+        $municipios = new Municipio;
+        $municipios->muni_nomb = $request->muni_nomb;
+        $municipios->depa_codi = $request->depa_codi;
+        $municipios->save();
+        return redirect()->route('municipio.index')->with('status','guardado');
     }
 
     /**
@@ -67,7 +68,9 @@ class MunicipioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $municipio = Municipio::findOrFail($id);
+        $departamentos = Departamento::orderBy('depa_nomb')->get();
+        return view('municipio.edit', compact('municipio','departamentos'));
     }
 
     /**
@@ -79,7 +82,10 @@ class MunicipioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $municipios = Municipio::findOrFail($id);
+        $municipios->fill($request->all());
+        $municipios->save();
+        return redirect()->route('municipio.index')->with('status','actualizado');
     }
 
     /**
