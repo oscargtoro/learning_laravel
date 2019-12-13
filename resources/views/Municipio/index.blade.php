@@ -36,7 +36,7 @@
                         <form method="POST" action="/municipio/{{$municipio->muni_codi}}" accept-charset="UTF-8" 
                             style="display:inline">
                             @csrf
-                            <input name="_method" type="hidden" value="DELETE">					
+                            @method('DELETE')				
                             <button type="submit" class="btn btn-danger btn-sm fa fa-trash" style="margin-right: 10px">	</button>				
                         </form>
                         <a href="/municipio/{{$municipio->muni_codi}}/edit"><i class="btn btn-info btn-sm fa fa-edit"></i></a>
