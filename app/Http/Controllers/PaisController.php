@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Departamento;   
-use Illuminate\Support\Facades\DB;
 
-class DepartamentoController extends Controller
+class PaisController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +13,7 @@ class DepartamentoController extends Controller
      */
     public function index()
     {
-        $departamentos = DB::table('tb_departamento as d')
-                    ->join('tb_pais','d.pais_codi','=','tb_pais.pais_codi')
-                    ->select('d.depa_codi','d.depa_nomb','d.pais_codi','tb_pais.pais_nomb')
-                    ->get();
-        return view('departamento.index', compact('departamentos'));
+        //
     }
 
     /**
@@ -29,8 +23,7 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        $paises = Pais::orderBy('pais_nomb')->get();
-        return view('departamento.create', compact('$paises'))->with('status', 'guardado');
+        //
     }
 
     /**

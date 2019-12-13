@@ -31,7 +31,7 @@ class MunicipioController extends Controller
     public function create()
     {
         $departamentos = Departamento::orderBy('depa_nomb')->get();
-        return view('municipio.create',compact('departamentos'));
+        return view('municipio.create',compact('departamentos'))->with('status', 'guardado');
     }
 
     /**
@@ -82,9 +82,9 @@ class MunicipioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $municipios = Municipio::findOrFail($id);
-        $municipios->fill($request->all());
-        $municipios->save();
+        $municipio = Municipio::findOrFail($id);
+        $municipio->fill($request->all());
+        $municipio->save();
         return redirect()->route('municipio.index')->with('status','actualizado');
     }
 
@@ -96,6 +96,8 @@ class MunicipioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $municipio = Municipio::findOrFail($id);
+        $municipio->delete();
+        return redirect()->route('municipio.index')->with('status', 'eliminado');
     }
 }
