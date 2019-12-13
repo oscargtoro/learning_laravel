@@ -2,7 +2,7 @@
 	@if(session('status') == 'eliminado')
 		<script type="text/javascript">
 			swal({
-				position: 'top-end',
+				position: 'center',
 				type: 'success',
 				title: 'Elemento Eliminado',
 				showConfirmButton: false,
@@ -13,7 +13,7 @@
 	@if(session('status') == 'guardado')
 		<script type="text/javascript">
 			swal({
-				position: 'top-end',
+				position: 'center',
 				type: 'success',
 				title: 'Elemento Guardado',
 				showConfirmButton: false,
@@ -24,7 +24,7 @@
 	@if(session('status') == 'actualizado')
 		<script type="text/javascript">
 			swal({
-				position: 'top-end',
+				position: 'center',
 				type: 'success',
 				title: 'Elemento Actualizado',
 				showConfirmButton: false,
