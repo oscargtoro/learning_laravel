@@ -11,6 +11,9 @@ use App\Municipio;
 
 class ComunaController extends Controller
 {
+    public function __Construct(){
+        $this->middleware('auth')->except('index');
+    }
     /**
      * Display a listing of the resource.
      *

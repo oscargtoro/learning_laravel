@@ -15,13 +15,17 @@
                 <th>Codigo</th>
                 <th>Comuna</th>            
                 <th>Municipio</th>
+                @can('isAdmin')
                 <th class="text-center">
+                    
                     <a href="/comuna/create" class="btn btn-primary btn-sm" id="nuevo"  
                         data-toggle="tooltip" title="Nueva Comuna">
                         <i class="fa fa-plus" aria-hidden="true"></i>
                         Nueva
                     </a> 
+                    
                 </th>
+                @endcan
             </tr>
         </thead>
         <tbody>
@@ -32,7 +36,9 @@
                     <td>{{$comuna->comu_codi}}</td>
                     <td>{{$comuna->comu_nomb}}</td>
                     <td>{{$comuna->muni_nomb}}</td>
+                    @can('isAdmin')
                     <td class="text-center">
+                        
                         <form method="POST" action="/comuna/{{$comuna->comu_codi}}" accept-charset="UTF-8" 
                             style="display:inline">
                             @csrf
@@ -40,7 +46,9 @@
                             <button type="submit" class="btn btn-danger btn-sm fa fa-trash" style="margin-right: 10px">	</button>				
                         </form>
                         <a href="/comuna/{{$comuna->comu_codi}}/edit"><i class="btn btn-info btn-sm fa fa-edit"></i></a>
+                        
                     </td>
+                    @endcan
                 </tr>
             @endforeach
         </tbody>

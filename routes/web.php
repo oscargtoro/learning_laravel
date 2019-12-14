@@ -20,3 +20,6 @@ Route::resources([
     'municipio' => 'MunicipioController',
     'departamento' => 'DepartamentoController'
 ]);
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
